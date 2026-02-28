@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Tasks - Earn Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .background-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #e94560, #ff6b6b);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+            opacity: 0.3;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #00d9ff, #00ff88);
+            top: 50%;
+            right: -50px;
+            animation-delay: -5s;
+            opacity: 0.3;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ffd700, #ff9500);
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -10s;
+            opacity: 0.3;
+        }
+
+        .shape-4 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #9b59b6, #e74c3c);
+            bottom: -100px;
+            right: 20%;
+            animation-delay: -15s;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, 50px) rotate(270deg);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 80px 50px;
+            max-width: 900px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Animated Title */
+        .title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: glow 2s ease-in-out infinite alternate, slideIn 1s ease-out;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #e94560, 0 0 20px #e94560, 0 0 30px #e94560;
+            }
+            to {
+                text-shadow: 0 0 20px #00d9ff, 0 0 40px #00d9ff, 0 0 60px #00d9ff;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 1.5rem;
+            color: #00d9ff;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Task Info Box */
+        .task-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: scaleIn 0.8s ease-out 0.8s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .task-info h2 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .task-info p {
+            color: #fff;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .task-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .task-list {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .task-list li {
+            color: #fff;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            list-style: none;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .task-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* Buttons Container */
+        .buttons-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 50px 0 80px 0;
+            animation: slideUp 1s ease-out 1.2s both;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Telegram Button */
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(45deg, #0088cc, #00aaff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telegram-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .telegram-btn:hover::before {
+            left: 100%;
+        }
+
+        .telegram-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.6);
+        }
+
+        .telegram-icon {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        /* YouTube Button */
+        .youtube-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(45deg, #ff0000, #ff4444);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .youtube-btn:hover::before {
+            left: 100%;
+        }
+
+        .youtube-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
+        }
+
+        .youtube-icon {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        /* Contact Section - Unique Design */
+        .contact-section {
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out 1.5s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-section h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Unique Contact Cards */
+        .contact-cards {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-width: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #25d366, #00ff88);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: #25d366;
+        }
+
+        .contact-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #25d366, #00ff88);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+        }
+
+        .contact-card-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        .contact-card-title {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-card-text {
+            color: #00ff88;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-card-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            animation: particle-float 10s infinite;
+            z-index: 0;
+        }
+
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .task-info h2 {
+                font-size: 1.5rem;
+            }
+            .task-amount {
+                font-size: 2rem;
+            }
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 60px;
+            }
+            .container {
+                padding: 40px 20px;
+                margin: 30px 15px;
+            }
+            .contact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Telegram Dropdown */
+        .telegram-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .telegram-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .telegram-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 15px;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            min-width: 280px;
+            z-index: 100;
+            animation: dropdownSlide 0.3s ease;
+        }
+
+        @keyframes dropdownSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .telegram-dropdown.active .telegram-menu {
+            display: block;
+        }
+
+        .task-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 25px;
+            text-decoration: none;
+            color: #1a1a2e;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .task-link:last-child {
+            border-bottom: none;
+        }
+
+        .task-link:hover {
+            background: linear-gradient(90deg, #0088cc, #00aaff);
+            color: #fff;
+        }
+
+        .task-link:hover .task-price {
+            color: #fff;
+        }
+
+        .task-number {
+            background: #0088cc;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .task-link:hover .task-number {
+            background: #fff;
+            color: #0088cc;
+        }
+
+        .task-name {
+            font-weight: 600;
+            flex: 1;
+            margin: 0 15px;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .task-price {
+            font-weight: 700;
+            color: #00ff88;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .task-link:hover .task-price {
+            color: #fff;
+            text-shadow: none;
+        }
+
+        .telegram-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0088cc, #00aaff);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+    <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+    <div class="particle" style="left: 60%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
+    <div class="particle" style="left: 80%; animation-delay: 5s;"></div>
+    <div class="particle" style="left: 90%; animation-delay: 7s;"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="title">Easy Tasks</h1>
+        <p class="subtitle">Complete Simple Tasks & Earn Money Instantly!</p>
+
+        <div class="task-info">
+            <h2>🎯 Two Tasks = ₦200</h2>
+            <p>Complete both tasks and earn <strong>₦100 per task!</strong></p>
+            
+            <ul class="task-list">
+                <li>Task 1: Join our Telegram Channel</li>
+                <li>Task 2: Subscribe to our YouTube Channel</li>
+            </ul>
+
+            <div class="task-amount">Total: ₦200</div>
+        </div>
+
+        <div class="buttons-container">
+            <!-- Telegram with Task Dropdown -->
+            <div class="telegram-dropdown">
+                <button class="telegram-btn" id="telegramBtn">
+                    <svg class="telegram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.696.064-1.225-.46-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                    Join Telegram
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="telegram-menu" id="telegramMenu">
+                    <a href="https://t.me/yourchannel1" class="task-link" target="_blank">
+                        <span class="task-number">Task 1</span>
+                        <span class="task-name">Join Channel A</span>
+                        <span class="task-price">₦100</span>
+                    </a>
+                    <a href="https://t.me/yourchannel2" class="task-link" target="_blank">
+                        <span class="task-number">Task 2</span>
+                        <span class="task-name">Join Channel B</span>
+                        <span class="task-price">₦100</span>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="https://youtube.com/@yourchannel" class="youtube-btn" target="_blank">
+                <svg class="youtube-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Subscribe YouTube
+            </a>
+        </div>
+
+        <!-- Unique Contact Section -->
+        <div class="contact-section">
+            <h3>📬 Get In Touch</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">After completing your tasks, send us proof!</p>
+            
+            <div class="contact-cards">
+                <!-- Submit Proof Card -->
+                <a href="https://wa.me/2347076303049?text=Hello,%20I%20have%20completed%20the%20tasks.%20Here%20is%20my%20proof:" class="contact-card" target="_blank">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-card-title">📤 Submit Proof</div>
+                    <div class="contact-card-text">Send Task Screenshot</div>
+                    <div class="contact-card-subtitle">Get verified & receive payment</div>
+                </a>
+
+                <!-- Payment Inquiries Card -->
+                <a href="https://wa.me/2347076303049?text=Hello,%20I%20have%20a%20payment%20inquiry:" class="contact-card" target="_blank">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-card-title">💰 Payment</div>
+                    <div class="contact-card-text">Payment Inquiries</div>
+                    <div class="contact-card-subtitle">Get your ₦200 reward</div>
+                </a>
+
+                <!-- General Inquiries Card -->
+                <a href="https://wa.me/2347076303049?text=Hello,%20I%20have%20an%20inquiry:" class="contact-card" target="_blank">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-card-title">💬 Inquiries</div>
+                    <div class="contact-card-text">Any Questions?</div>
+                    <div class="contact-card-subtitle">We're here to help 24/7</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Telegram Menu
+        document.getElementById('telegramBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = document.querySelector('.telegram-dropdown');
+            dropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.telegram-dropdown');
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Add dynamic particle generation
+        function createParticles() {
+            const particleCount = 20;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.width = (5 + Math.random() * 10) + 'px';
+                particle.style.height = particle.style.width;
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Add hover sound effect simulation with CSS
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transform = 'scale(1.05)';
+            });
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
